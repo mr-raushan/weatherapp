@@ -37,7 +37,6 @@ function App() {
       const res = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=${WEATHER_API_KEY}`
       );
-      console.log("Success to fetch weather ", res.data);
       if (res.data.cod === 200) {
         dispatch(setTemperature(res?.data?.main?.temp));
         dispatch(setHumidity(res?.data?.main?.humidity));
@@ -94,22 +93,24 @@ function App() {
               ? `${temperature}°C`
               : "-"}
           </h1>
-          <p className="text-2xl text-center font-medium">{cityName || "-"}</p>
+          <p className="text-2xl text-center font-medium mb-2">
+            {cityName || "-"}
+          </p>
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-between w-[30%] mt-4">
-          <div className="mb-4">
+          <div className="mb-4 bg-slate-500 p-2 py-4 px-10 rounded-2xl">
             <WiHumidity className="text-4xl mb-1" />
-            <span className="text-lg font-medium">
+            <span className="text-lg text-center pl-2 font-medium">
               {humidity !== null ? `${humidity}%` : "-"}
             </span>
             <p className="text-sm">Humidity</p>
           </div>
-          <div>
-            <WiStrongWind className="text-4xl mb-1" />
-            <span className="text-lg font-medium">
+          <div className="bg-slate-500 p-2 py-4 px-10 rounded-2xl">
+            <WiStrongWind className="text-4xl mb-1 ml-4 text-center" />
+            <span className="text-lg mb-1  font-medium">
               {windSpeed !== null ? `${windSpeed}km/h` : "-"}
             </span>
-            <p className="text-sm">Wind</p>
+            <p className="text-sm text-center">Wind</p>
           </div>
         </div>
       </div>
